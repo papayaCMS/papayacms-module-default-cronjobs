@@ -198,7 +198,7 @@ class time_crontab extends base_crontime {
           $this->weekdays[0] + 1,
           $this->currentYear + 1
         );
-        if ((!isset($result)) || $timeByWeekday < $result) {
+        if (((!isset($result) || $result === 0)) || $timeByWeekday < $result) {
           $result = $timeByWeekday;
         }
       }
@@ -236,7 +236,7 @@ class time_crontab extends base_crontime {
           1 + $this->weekdays[0],
           $this->currentYear
         );
-        if ((!isset($result)) || $timeByWeekday < $result) {
+        if (((!isset($result) || $result === 0)) || $timeByWeekday < $result) {
           $result = $timeByWeekday;
         }
       }
@@ -296,11 +296,11 @@ class time_crontab extends base_crontime {
             $this->currentYear
           );
         }
-        if ((!isset($result) || $timeByWeekday < $result)) {
+        if (((!isset($result) || $result === 0) || $timeByWeekday < $result)) {
           $result = $timeByWeekday;
         }
       }
-      if (!isset($result) && $date === NULL && $weekday === NULL) {
+      if ((!isset($result) || $result === 0) && $date === NULL && $weekday === NULL) {
         return $this->_getTime('nextavailmonth');
       }
       break;
